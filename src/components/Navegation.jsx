@@ -176,28 +176,21 @@ function ContactMenu({ theme }) {
           ? 'bg-black border border-[#9A53D0] shadow-[0_0_15px_#F394F8]'
           : 'bg-white border border-[#F4DBDB] shadow-xl'
       }`}>
-        <a href="https://github.com/tuUsuario" target="_blank" rel="noopener noreferrer" className={`transition-all duration-300 text-xl p-2 rounded-full ${
+        <a href="https://github.com/FRGina" target="_blank" rel="noopener noreferrer" className={`transition-all duration-300 text-xl p-2 rounded-full ${
           theme === 'dark'
             ? 'text-[#97E3FE] hover:text-[#F394F8] hover:bg-gray-800'
             : 'text-[#CD4662] hover:text-[#AEC289] hover:bg-[#F4DBDB]'
         }`}>
           <FaGithub />
         </a>
-        <a href="https://linkedin.com/in/tuUsuario" target="_blank" rel="noopener noreferrer" className={`transition-all duration-300 text-xl p-2 rounded-full ${
+        <a href="https://linkedin.com/in/georgina-rptela" target="_blank" rel="noopener noreferrer" className={`transition-all duration-300 text-xl p-2 rounded-full ${
           theme === 'dark'
             ? 'text-[#97E3FE] hover:text-[#F394F8] hover:bg-gray-800'
             : 'text-[#CD4662] hover:text-[#AEC289] hover:bg-[#F4DBDB]'
         }`}>
           <FaLinkedin />
         </a>
-        <a href="https://twitter.com/tuUsuario" target="_blank" rel="noopener noreferrer" className={`transition-all duration-300 text-xl p-2 rounded-full ${
-          theme === 'dark'
-            ? 'text-[#97E3FE] hover:text-[#F394F8] hover:bg-gray-800'
-            : 'text-[#CD4662] hover:text-[#AEC289] hover:bg-[#F4DBDB]'
-        }`}>
-          <FaTwitter />
-        </a>
-        <a href="https://instagram.com/tuUsuario" target="_blank" rel="noopener noreferrer" className={`transition-all duration-300 text-xl p-2 rounded-full ${
+        <a href="https://instagram.com/ginaa_xd7" target="_blank" rel="noopener noreferrer" className={`transition-all duration-300 text-xl p-2 rounded-full ${
           theme === 'dark'
             ? 'text-[#97E3FE] hover:text-[#F394F8] hover:bg-gray-800'
             : 'text-[#CD4662] hover:text-[#AEC289] hover:bg-[#F4DBDB]'
