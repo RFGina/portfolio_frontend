@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const portApi = axios.create({
-    baseURL: 'http://localhost:8000/contenido/api/v1'
+    baseURL: 'https://portfolio-backend-jv44.onrender.com/contenido/api/v1'
 })
 
 export const getAllProject = () => portApi.get('/project');
