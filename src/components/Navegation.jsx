@@ -45,15 +45,16 @@ export function Navegation() {
         </div>
 
         {/* Menú móvil */}
-        <div className={`fixed md:hidden inset-0 z-50 transform transition-transform duration-300 ease-in-out ${
+        <div className={`fixed md:hidden top-16 right-0 w-64 h-[calc(100%-4rem)] z-50 transform transition-transform duration-300 ease-in-out ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
-        } ${theme === 'dark' ? 'bg-black' : 'bg-[#F4F2EF]'}`}>
+        } ${theme === 'dark' ? 'bg-black bg-opacity-95' : 'bg-white bg-opacity-95'}`}>
           <div className="flex flex-col items-center justify-center h-full space-y-8">
             <MobileLinks theme={theme} setMenuOpen={setMenuOpen} />
             <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
           </div>
         </div>
-      </div>
+        </div>
+
       
       {/* Estilos para la fuente */}
       <style>
