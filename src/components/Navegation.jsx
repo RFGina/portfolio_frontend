@@ -45,7 +45,7 @@ export function Navegation() {
         </div>
 
         {/* Menú móvil */}
-        <div className={`fixed md:hidden inset-0 z-10 transform transition-transform duration-300 ease-in-out ${
+        <div className={`fixed md:hidden inset-0 z-50 transform transition-transform duration-300 ease-in-out ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         } ${theme === 'dark' ? 'bg-black' : 'bg-[#F4F2EF]'}`}>
           <div className="flex flex-col items-center justify-center h-full space-y-8">

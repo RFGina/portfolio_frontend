@@ -46,11 +46,15 @@ export function HabilidadesPage() {
     }`}>
       
       {/* Título con estilo según el tema */}
-      <h1 className={`text-5xl font-bold mb-10 tracking-wide transition-all duration-500 text-center ${
-        theme === 'dark' 
-          ? 'glitch text-[#97E3FE]' 
-          : 'text-[#CD4662] font-serif italic drop-shadow-sm'
-      }`} data-text={theme === 'dark' ? "HABILIDADES" : ""}>
+      <h1
+          className={`text-3xl font-bold mb-8 tracking-wide transition-all duration-500 text-center ${
+            theme === 'dark' 
+              ? 'glitch text-[#97E3FE]' 
+              : 'text-[#CD4662] font-serif italic drop-shadow-sm'
+          }`}
+          {...(theme === 'dark' && { 'data-text': "HABILIDADES" })}
+        >
+
         HABILIDADES
         {theme === 'light' && (
           <div className="w-20 h-1 bg-[#AEC289] mt-2 rounded-full mx-auto"></div>
