@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useTheme } from "../hooks/useTheme";
 import { getAllProject } from '../api/portfolio.api' 
 import "../css/glitch.css";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export function ProyectosPage() {
   const [proyectos, setProyectos] = useState([]);
@@ -54,6 +55,10 @@ export function ProyectosPage() {
     } else if (['mp4', 'webm', 'ogg', 'mov'].includes(extension)) {
       return (
         <video
+          autoPlay
+          muted
+          loop
+          playsInline
           controls
           className="mt-4 mx-auto rounded-lg shadow-lg max-h-64"
           onError={(e) => {
@@ -166,7 +171,7 @@ export function ProyectosPage() {
               : "bg-[#CD4662] hover:bg-[#AD2642] text-white"
           }`}
         >
-          ⬅
+          <ArrowLeft className="w-6 h-6" />
         </button>
         <button 
           onClick={nextSlide} 
@@ -176,7 +181,7 @@ export function ProyectosPage() {
               : "bg-[#CD4662] hover:bg-[#AD2642] text-white"
           }`}
         >
-          ➡
+          <ArrowRight className="w-6 h-6" />
         </button>
       </div>
 
