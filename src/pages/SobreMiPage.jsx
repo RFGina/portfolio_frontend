@@ -60,27 +60,23 @@ export function SobreMiPage() {
           }`}>
             
             <p className="text-lg font-semibold">
-              ¡Hola! Soy Gina Rotela, tengo 24 años y soy de Misiones, Argentina.
+              ¡Hola! Soy Gina, tengo 24 años y soy de Misiones, Argentina.
             </p>
             
             <p>
-              <strong>Formación académica:</strong> Me gradué como <strong>Técnico Analista en Sistemas Informáticos</strong> en el 
-              <strong> CEP N°62 de Santo Pipó</strong>, donde adquirí una sólida base en desarrollo de software y análisis de sistemas.
+              Me gradué como <strong>Técnico Analista en Sistemas Informáticos</strong> en el 
+              <strong> CEP N°62 de Santo Pipó</strong>, donde adquirí una sólida base análisis de sistemas.
             </p>
             
             <p>
-              <strong>Cursos y capacitaciones:</strong> Complementé mi formación con el programa <strong>Argentina Programa 4.0</strong>, 
-              donde profundicé mis conocimientos en desarrollo web full stack, y continúo capacitándome en nuevas tecnologías.
+              <strong>Aprendizaje continuo</strong> De forma <strong>autodidacta y siempre enfocada</strong>, he complementado 
+              mi formación con diversos cursos, incluyendo <strong>Argentina Programa</strong> y otras capacitaciones 
+              especializadas en <strong>desarrollo web</strong>.
             </p>
             
             <p>
               <strong>Mi pasión:</strong> Me apasiona crear soluciones innovadoras que combinen funcionalidad y diseño, 
               siempre buscando aprender y enfrentar nuevos desafíos en el mundo de la tecnología.
-            </p>
-            
-            <p className={`italic ${theme === 'dark' ? 'text-gray-400' : 'text-[#8B7D6B]'}`}>
-              Actualmente busco oportunidades para seguir creciendo profesionalmente y contribuir con mis habilidades 
-              en proyectos desafiantes.
             </p>
           </div>
         </div>
