@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTheme } from "../hooks/useTheme";
 import { getAllProject } from '../api/portfolio.api' 
 import "../css/glitch.css";
@@ -8,6 +8,7 @@ export function ProyectosPage() {
   const [proyectos, setProyectos] = useState([]);
   const [current, setCurrent] = useState(0);
   const { theme } = useTheme();
+  const videoRef = useRef(null);
 
   // Cargar proyectos desde la API cuando se monta el componente
   useEffect(() => {
@@ -22,6 +23,16 @@ export function ProyectosPage() {
     fetchProjects();
   }, []);
 
+  // Reiniciar video cuando cambia el proyecto actual
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load(); // Esto fuerza la recarga del video
+      videoRef.current.play().catch(e => {
+        console.log("Auto-play prevenido por el navegador:", e);
+      });
+    }
+  }, [current]); // Se ejecuta cada vez que cambia el proyecto actual
+
   const nextSlide = () => {
     setCurrent((prev) =>
       prev === proyectos.length - 1 ? 0 : prev + 1
@@ -34,62 +45,85 @@ export function ProyectosPage() {
     );
   };
 
-  // Función para determinar el tipo de archivo y renderizar el elemento apropiado
   const renderMedia = (proyecto) => {
-    if (!proyecto.file) return null;
-    
-    const fileUrl = proyecto.file;
-    const extension = fileUrl.split('.').pop().toLowerCase();
-    
-    if (['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp'].includes(extension)) {
-      return (
-        <img
-          src={fileUrl}
-          alt={proyecto.title}
-          className="mt-4 mx-auto rounded-lg shadow-lg max-h-64 object-contain"
-          onError={(e) => {
-            e.target.style.display = 'none';
-          }}
-        />
-      );
-    } else if (['mp4', 'webm', 'ogg', 'mov'].includes(extension)) {
-      return (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          controls
-          className="mt-4 mx-auto rounded-lg shadow-lg max-h-64"
-          onError={(e) => {
-            e.target.style.display = 'none';
-          }}
-        >
-          <source src={fileUrl} type={`video/${extension}`} />
-          Tu navegador no soporta el elemento de video.
-        </video>
-      );
-    } else {
-      return (
-        <div className="mt-4 p-4 bg-gray-800 rounded-lg">
-          <p className="text-center">Tipo de archivo no compatible: {extension}</p>
-          <a 
-            href={fileUrl} 
-            className="block text-center text-blue-400 mt-2"
-            target="_blank" 
-            rel="noopener noreferrer"
+    try {
+      const fileUrl = proyecto.file || proyecto.image || proyecto.video || proyecto.media;
+      
+      if (!fileUrl) {
+        console.warn(`No hay archivo multimedia para el proyecto: ${proyecto.title}`);
+        return null;
+      }
+      
+      const fileName = fileUrl.split('/').pop();
+      const extension = fileName.split('.').pop().toLowerCase();
+      
+      console.log(`Proyecto: ${proyecto.title}, Archivo: ${fileUrl}, Extensión: ${extension}`);
+
+      if (['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp'].includes(extension)) {
+        return (
+          <img
+            src={fileUrl}
+            alt={proyecto.title}
+            className="mt-4 mx-auto rounded-lg shadow-lg max-h-64 object-contain"
+            onError={(e) => {
+              console.error(`Error cargando imagen: ${fileUrl}`);
+              e.target.style.display = 'none';
+            }}
+          />
+        );
+      } else if (['mp4', 'webm', 'ogg', 'mov'].includes(extension)) {
+        return (
+          <video
+            ref={videoRef} // Referencia para controlar el video
+            key={current} // Key única para forzar recreación del componente
+            autoPlay
+            muted
+            loop
+            playsInline
+            controls
+            className="mt-4 mx-auto rounded-lg shadow-lg max-h-64"
+            onError={(e) => {
+              console.error(`Error cargando video: ${fileUrl}`);
+              e.target.style.display = 'none';
+            }}
           >
-            Ver archivo
-          </a>
-        </div>
-      );
+            <source src={fileUrl} type={`video/${extension}`} />
+            Tu navegador no soporta el elemento de video.
+          </video>
+        );
+      } else {
+        console.warn(`Extensión no manejada: ${extension} para archivo: ${fileUrl}`);
+        return (
+          <div className="mt-4 p-4 bg-gray-800 rounded-lg">
+            <p className="text-center">Tipo de archivo no compatible: {extension}</p>
+            <a 
+              href={fileUrl} 
+              className="block text-center text-blue-400 mt-2"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Ver archivo
+            </a>
+          </div>
+        );
+      }
+    } catch (error) {
+      console.error('Error renderizando media:', error);
+      return null;
     }
   };
 
   if (proyectos.length === 0) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <p className="text-lg">Cargando proyectos...</p>
+      <div className={`min-h-screen flex items-center justify-center transition-all duration-500 ${
+        theme === 'dark' ? 'bg-black' : 'bg-[#F4F2EF]'
+      }`}>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto mb-4 border-[#97E3FE]"></div>
+          <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#5A3E36]'}>
+            Cargando Proyectos...
+          </p>
+        </div>
       </div>
     );
   }
