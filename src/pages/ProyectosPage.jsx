@@ -26,12 +26,12 @@ export function ProyectosPage() {
   // Reiniciar video cuando cambia el proyecto actual
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.load(); // Esto fuerza la recarga del video
+      videoRef.current.load();
       videoRef.current.play().catch(e => {
         console.log("Auto-play prevenido por el navegador:", e);
       });
     }
-  }, [current]); // Se ejecuta cada vez que cambia el proyecto actual
+  }, [current]);
 
   const nextSlide = () => {
     setCurrent((prev) =>
@@ -64,7 +64,7 @@ export function ProyectosPage() {
           <img
             src={fileUrl}
             alt={proyecto.title}
-            className="mt-4 mx-auto rounded-lg shadow-lg max-h-64 object-contain"
+            className="mt-4 mx-auto rounded-lg shadow-lg w-full max-w-md object-contain"
             onError={(e) => {
               console.error(`Error cargando imagen: ${fileUrl}`);
               e.target.style.display = 'none';
@@ -74,14 +74,14 @@ export function ProyectosPage() {
       } else if (['mp4', 'webm', 'ogg', 'mov'].includes(extension)) {
         return (
           <video
-            ref={videoRef} // Referencia para controlar el video
-            key={current} // Key única para forzar recreación del componente
+            ref={videoRef}
+            key={current}
             autoPlay
             muted
             loop
             playsInline
             controls
-            className="mt-4 mx-auto rounded-lg shadow-lg max-h-64"
+            className="mt-4 mx-auto rounded-lg shadow-lg w-full max-w-md"
             onError={(e) => {
               console.error(`Error cargando video: ${fileUrl}`);
               e.target.style.display = 'none';
@@ -132,7 +132,7 @@ export function ProyectosPage() {
 
   return (
     <div
-      className={`min-h-screen px-8 py-12 flex flex-col items-center transition-all duration-500 ${
+      className={`min-h-screen px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-12 flex flex-col items-center transition-all duration-500 ${
         theme === "dark"
           ? "bg-black text-gray-200"
           : "bg-[#F4F2EF] text-[#5A3E36]"
@@ -140,7 +140,7 @@ export function ProyectosPage() {
     >
       {/* Título */}
       <h1
-        className={`text-5xl font-extrabold tracking-widest mb-10 transition-all duration-500 ${
+        className={`text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-wider sm:tracking-widest mb-6 sm:mb-8 md:mb-10 transition-all duration-500 text-center ${
           theme === "dark"
             ? "glitch text-[#97E3FE]"
             : "text-[#CD4662] font-serif italic"
@@ -153,36 +153,36 @@ export function ProyectosPage() {
       {/* Carrusel */}
       <div className="relative w-full max-w-3xl">
         <div
-          className={`p-8 rounded-xl border transition-all duration-500 text-center ${
+          className={`p-4 sm:p-6 md:p-8 rounded-xl border transition-all duration-500 text-center mx-2 ${
             theme === "dark"
-              ? "border-[#9A53D0] bg-gradient-to-br from-[#2843AD] to-[#818DE0] shadow-[0_0_25px_#F394F8]"
+              ? "border-[#9A53D0] bg-gradient-to-br from-[#2843AD] to-[#818DE0] shadow-[0_0_15px_#F394F8]"
               : "border-[#F4DBDB] bg-white shadow-lg"
           }`}
         >
           <h2
-            className={`text-2xl font-bold transition-colors duration-500 ${
+            className={`text-xl sm:text-2xl font-bold transition-colors duration-500 mb-3 sm:mb-4 ${
               theme === "dark"
-                ? "text-[#F394F8] drop-shadow-[0_0_6px_#F394F8]"
+                ? "text-[#F394F8] drop-shadow-[0_0_4px_#F394F8]"
                 : "text-[#CD4662]"
             }`}
           >
             {currentProyecto.title}
           </h2>
           
-          {/* Descripción - siempre visible */}
+          {/* Descripción */}
           {currentProyecto.description && (
-            <p className={`my-4 ${theme === "dark" ? "text-gray-300" : "text-[#5A3E36]"}`}>
+            <p className={`my-3 sm:my-4 text-sm sm:text-base ${theme === "dark" ? "text-gray-300" : "text-[#5A3E36]"}`}>
               {currentProyecto.description}
             </p>
           )}
           
-          {/* Enlace - solo si está disponible */}
+          {/* Enlace */}
           {currentProyecto.link && (
             <a 
               href={currentProyecto.link} 
               target="_blank" 
               rel="noopener noreferrer"
-              className={`inline-block my-3 px-4 py-2 rounded-lg transition-all ${
+              className={`inline-block my-3 px-4 py-2 rounded-lg transition-all text-sm sm:text-base ${
                 theme === "dark" 
                   ? "bg-[#9A53D0] hover:bg-[#7A33B0]" 
                   : "bg-[#CD4662] hover:bg-[#AD2642] text-white"
@@ -192,44 +192,44 @@ export function ProyectosPage() {
             </a>
           )}
 
-          {/* Renderizar imagen o video según el tipo de archivo */}
+          {/* Media */}
           {renderMedia(currentProyecto)}
         </div>
 
-        {/* Botones de navegación */}
+        {/* Botones de navegación - Mejorados para móvil */}
         <button 
           onClick={prevSlide} 
-          className={`absolute top-1/2 -left-12 transform -translate-y-1/2 text-3xl p-2 rounded-full transition-all ${
+          className={`absolute top-1/2 -left-3 sm:-left-4 md:-left-12 transform -translate-y-1/2 p-2 rounded-full transition-all z-10 ${
             theme === "dark" 
               ? "bg-[#2843AD] hover:bg-[#3843DD] text-[#F394F8]" 
               : "bg-[#CD4662] hover:bg-[#AD2642] text-white"
           }`}
         >
-          <ArrowLeft className="w-6 h-6" />
+          <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
         </button>
         <button 
           onClick={nextSlide} 
-          className={`absolute top-1/2 -right-12 transform -translate-y-1/2 text-3xl p-2 rounded-full transition-all ${
+          className={`absolute top-1/2 -right-3 sm:-right-4 md:-right-12 transform -translate-y-1/2 p-2 rounded-full transition-all z-10 ${
             theme === "dark" 
               ? "bg-[#2843AD] hover:bg-[#3843DD] text-[#F394F8]" 
               : "bg-[#CD4662] hover:bg-[#AD2642] text-white"
           }`}
         >
-          <ArrowRight className="w-6 h-6" />
+          <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
         </button>
       </div>
 
       {/* Indicadores */}
-      <div className="flex gap-2 mt-6">
+      <div className="flex gap-2 mt-4 sm:mt-6 flex-wrap justify-center">
         {proyectos.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className={`h-3 w-3 rounded-full transition-all duration-300 ${
+            className={`h-2 w-2 sm:h-3 sm:w-3 rounded-full transition-all duration-300 ${
               i === current
                 ? theme === "dark"
-                  ? "bg-[#F394F8] shadow-[0_0_12px_#F394F8]"
-                  : "bg-[#CD4662] shadow-[0_0_8px_#CD4662]"
+                  ? "bg-[#F394F8] shadow-[0_0_8px_#F394F8]"
+                  : "bg-[#CD4662] shadow-[0_0_6px_#CD4662]"
                 : theme === "dark"
                 ? "bg-[#2843AD] hover:bg-[#3843DD]"
                 : "bg-[#AEC289] hover:bg-[#8EA269]"
