@@ -152,6 +152,17 @@ function MobileLinks({ theme, setMenuOpen }) {
         }`}>
           <FaInstagram />
         </a>
+         <a
+          href="mailto:georginarotela40@gmail.com?subject=Contacto%20desde%20tu%20portfolio&body=Hola%20Gina,"
+          className={`transition-all duration-300 text-xl p-2 rounded-full ${
+            theme === 'dark'
+              ? 'text-[#97E3FE] hover:text-[#F394F8] hover:bg-gray-800'
+              : 'text-[#CD4662] hover:text-[#AEC289] hover:bg-[#F4DBDB]'
+          }`}
+        >
+         
+          <FaEnvelope />
+        </a>
       </div>
     </>
   );
